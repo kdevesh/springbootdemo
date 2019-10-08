@@ -12,9 +12,10 @@ import java.util.stream.Collectors;
 @Repository("fakeDao")
 public class FakePersonDataAccessService implements PersonDAO {
     private static List<Person> db = new ArrayList<>();
+
     @Override
     public int insertPerson(UUID id, Person person) {
-        db.add(new Person(id,person.getName()));
+        db.add(new Person(id, person.getName()));
         return 1;
     }
 
@@ -25,13 +26,13 @@ public class FakePersonDataAccessService implements PersonDAO {
 
     @Override
     public Optional<Person> getPersonById(UUID id) {
-        return db.stream().filter(person-> person.getId().equals(id)).findFirst();
+        return db.stream().filter(person -> person.getId().equals(id)).findFirst();
     }
 
     @Override
     public int deletePersonById(UUID id) {
         Person obj = getPersonById(id).orElse(null);
-        if(obj!=null) {
+        if (obj != null) {
             db.remove(obj);
             return 1;
         }
@@ -41,8 +42,8 @@ public class FakePersonDataAccessService implements PersonDAO {
     @Override
     public int updatePerson(UUID id, Person person) {
         Person obj = getPersonById(id).orElse(null);
-        if(obj!=null){
-            db = db.stream().map(person1 -> new Person(id,person.getName())).collect(Collectors.toList());
+        if (obj != null) {
+            db = db.stream().map(person1 -> new Person(id, person.getName())).collect(Collectors.toList());
             return 1;
         }
         return 0;

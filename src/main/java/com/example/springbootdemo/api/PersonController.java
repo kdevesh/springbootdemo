@@ -7,7 +7,6 @@ import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,24 +19,29 @@ public class PersonController {
     public PersonController(PersonService personService) {
         this.personService = personService;
     }
+
     @PostMapping
-    public void addPerson(@Valid @NonNull @RequestBody Person person){
+    public void addPerson(@Valid @NonNull @RequestBody Person person) {
         personService.addPerson(person);
     }
+
     @GetMapping
-    public List<Person> getAllPeople(){
+    public List<Person> getAllPeople() {
         return personService.getAllPeople();
     }
+
     @GetMapping(path = "{id}")
-    public Person getPersonById(@PathVariable("id") UUID id){
+    public Person getPersonById(@PathVariable("id") UUID id) {
         return personService.getPersonById(id).orElse(null);
     }
+
     @DeleteMapping(path = "{id}")
-    public void deletePersonById(@PathVariable("id") UUID id){
+    public void deletePersonById(@PathVariable("id") UUID id) {
         personService.deletePersonById(id);
     }
+
     @PutMapping(path = "{id}")
-    public void updatePersonById(@PathVariable("id") UUID id,@Valid @NonNull @RequestBody Person person){
-        personService.updatePersonById(id,person);
+    public void updatePersonById(@PathVariable("id") UUID id, @Valid @NonNull @RequestBody Person person) {
+        personService.updatePersonById(id, person);
     }
 }

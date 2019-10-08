@@ -15,23 +15,27 @@ public class PersonService {
     private final PersonDAO personDAO;
 
     @Autowired
-    public PersonService(@Qualifier("fakeDao") PersonDAO personDAO) {
+    public PersonService(@Qualifier("postgres") PersonDAO personDAO) {
         this.personDAO = personDAO;
     }
 
-    public int addPerson(Person person){
+    public int addPerson(Person person) {
         return personDAO.insertPerson(person);
     }
-    public List<Person> getAllPeople(){
+
+    public List<Person> getAllPeople() {
         return personDAO.selectAllPeople();
     }
-    public Optional<Person> getPersonById(UUID id){
+
+    public Optional<Person> getPersonById(UUID id) {
         return personDAO.getPersonById(id);
     }
-    public int deletePersonById(UUID id){
+
+    public int deletePersonById(UUID id) {
         return personDAO.deletePersonById(id);
     }
-    public int updatePersonById(UUID id,Person person){
-        return personDAO.updatePerson(id,person);
+
+    public int updatePersonById(UUID id, Person person) {
+        return personDAO.updatePerson(id, person);
     }
 }
